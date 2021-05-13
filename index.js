@@ -74,26 +74,27 @@ class Airplane {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- class Car {
-  constructor(model, milesPerGallon) {
-    this.model = model;
-    this.milesPerGallon = milesPerGallon;
-    this.tank = 0;
-    this.odometer = 0;
-  }
-  fill(gallons) {
-    this.tank += gallons;
-  }
-  drive(distance) {
-    if(tank === 0) {
-      return `I ran out of fuel at ${this.odometer} miles!`;
-    } else {
-      this.odometer += distance;
-      this.tank -= distance / this.milesPerGallon;
+  class Car {
+    constructor(model, milesPerGallon) {
+      this.model = model;
+      this.milesPerGallon = milesPerGallon;
+      this.tank = 0;
+      this.odometer = 0;
+    }
+    fill(gallons) {
+      this.tank += gallons;
+    }
+    drive(distance) {
+      if(this.tank === 0) {
+        return `I ran out of fuel at ${this.odometer} miles!`;
+      } else {
+        this.odometer += distance;
+        this.tank -= distance / this.milesPerGallon;
+      }
     }
   }
-}
-  
+
+
   /*
     TASK 3
       - Write a Lambdasian class.
@@ -106,8 +107,15 @@ class Airplane {
           + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
           + {name} and {location} of course come from the instance's own properties.
   */
- class Lambdasian {
-    
+  class Lambdasian {
+    constructor(object) {
+      this.name = object.name,
+      this.age = object.age,
+      this.location = object.location
+    }
+    speak() {
+      return `Hello my name is ${this.name}, I am from ${this.location}`;
+    }
   }
   
   /*
