@@ -85,11 +85,14 @@ class Airplane {
       this.tank += gallons;
     }
     drive(distance) {
-      if(this.tank === 0) {
-        return `I ran out of fuel at ${this.odometer} miles!`;
-      } else {
-        this.odometer += distance;
+      while(this.tank - (distance / this.milesPerGallon)) {
+        if(this.tank <= 0) {
+          return `I ran out of fuel at ${this.odometer} miles!`;
+          break;
+        }
         this.tank -= distance / this.milesPerGallon;
+        this.odometer += distance;
+        
       }
     }
   }
@@ -109,9 +112,9 @@ class Airplane {
   */
   class Lambdasian {
     constructor(object) {
-      this.name = object.name,
-      this.age = object.age,
-      this.location = object.location
+      this.name = object.name;
+      this.age = object.age;
+      this.location = object.location;
     }
     speak() {
       return `Hello my name is ${this.name}, I am from ${this.location}`;
@@ -132,9 +135,14 @@ class Airplane {
           + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
           + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
   */
- class Instructor {
-
- }
+  class Instructor extends Lambdasian {
+    constructor(object) {
+      super(object);
+      this.specialty = object.specialty;
+      this.favLanguage = object.favLanguage;
+      this.catchPhrase = object.catchPhrase;
+    }
+  }
   /*
     TASK 5
       - Write a Student class extending Lambdasian.
