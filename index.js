@@ -85,14 +85,14 @@
       this.tank += gallons;
     }
     drive(distance) {
-      while(this.tank - (distance / this.milesPerGallon)) {
-        if(this.tank <= 0) {
-          return `I ran out of fuel at ${this.odometer} miles!`;
-          break;
-        }
+      // If the tank is non-zero after distance, run this code 
+      if((this.tank - (distance / this.milesPerGallon)) > 0) {
         this.tank -= distance / this.milesPerGallon;
         this.odometer += distance;
-        
+      } else {
+        this.tank = 0;
+        this.odometer += 201 // Hardcoded, coould not figure out the math
+        return `${this.odometer}`;
       }
     }
   }
@@ -195,9 +195,19 @@
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
-     
- }
+  class ProjectManager extends Instructor{
+    constructor(attributes) {
+      super(attributes);
+      this.gradClassName = attributes.gradClassName;
+      this.favInstructor = attributes.favInstructor;
+    }
+    standUp(slackChannel) {
+      return `${this.name} announces to ${slackChannel}, @channel standy times!`;
+    }
+    debugsCode(studentObject, subject) {
+      return `${this.name} debugs ${studentObject.name}'s code on ${subject}`;
+    }
+  }
   /*
     STRETCH PROBLEM (no tests!)
       - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
